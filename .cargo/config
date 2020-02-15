@@ -1,0 +1,7 @@
+[alias]
+br = "build --release"
+
+[cargo-new]
+name = "Gordon Hart"
+email = "gordon.hart2@gmail.com"
+vcs = "git"
