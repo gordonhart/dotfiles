@@ -1,6 +1,5 @@
 # PATHS =========================================================================================
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR="/usr/bin/vim"
 
 # ALIASES =======================================================================================
@@ -13,11 +12,7 @@ alias sl="ls -p"
 
 alias rm="rm -i" # warn before deleting file
 
-alias cd="changedir" # rename tmux pane on directory change
-# alias cat="catnonbinary"
-
 # naviagation aliases
-# alias .="ls -p" # ls alias
 alias ..="cd .." # back one
 alias ...="cd ../.." # two
 alias ....="cd ../../.." # three
@@ -92,14 +87,14 @@ truncate() { # <truncate len dir> modifies the path to fit in the given size
 
 # colors for prompt
 C_GRAY="\[\033[38;5;246m\]" # nice gray color, using term-256
-C_ORANGE="\[\033[38;5;209m\]" # pale orange
+C_ORANGE="\[\033[38;5;214m\]" # orange
 C_WHITE="\[\033[38;5;255m\]" # eeeeee
 
 setPrompt(){
   LEN=60
   OUT=$(truncate $LEN "`pwd`")
   SEP="$(if [[ $EUID -ne 0 ]]; then echo '$'; else echo '#'; fi)"
-  PS1="$C_GRAY`whoami`$C_WHITE in $C_PINK$OUT $C_GRAY$SEP $C_WHITE"
+  PS1="$C_GRAY`whoami`$C_WHITE in $C_ORANGE$OUT $C_GRAY$SEP $C_WHITE"
 }
 export PROMPT_COMMAND=setPrompt
 
