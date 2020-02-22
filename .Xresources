@@ -1,0 +1,6 @@
+# configure xterm font
+xterm*faceName: Monospace
+xterm*faceSize: 6
+
+# ensure background is black
+xterm*background: black
