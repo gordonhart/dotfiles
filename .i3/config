@@ -168,3 +168,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+#
+# custom additions
+#
+
+# single pixel window border -- also removes title bar
+new_window pixel 1
