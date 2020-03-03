@@ -27,3 +27,6 @@ nmap B :b#<CR>
 " color column 80, 100
 set colorcolumn=80,100
 highlight ColorColumn ctermbg=234
+
+" automatically fold doc comments in Rust
+autocmd FileType rust setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*///'
