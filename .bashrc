@@ -1,6 +1,7 @@
 # PATHS =========================================================================================
 
 export EDITOR="/usr/bin/vim"
+export TERM="xterm-256color"
 
 # ALIASES =======================================================================================
 
@@ -16,6 +17,14 @@ alias rm="rm -i" # warn before deleting file
 alias ..="cd .." # back one
 alias ...="cd ../.." # two
 alias ....="cd ../../.." # three
+alias .....="cd ../../../.." # four
+alias ......="cd ../../../../.." # five
+alias .......="cd ../../../../../.." # six
+
+# source extra bash profile completion tools if available
+if [ -f /etc/profile.d/bash_completion.sh ]; then
+  source /etc/profile.d/bash_completion.sh
+fi
 
 # FUNCTIONS =====================================================================================
 
