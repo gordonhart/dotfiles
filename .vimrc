@@ -15,6 +15,8 @@ set expandtab
 set nu
 set nowrap
 
+set autoindent
+
 " save with double backslash \\
 nmap \\ :w<CR>
 
