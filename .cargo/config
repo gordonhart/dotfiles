@@ -1,5 +1,10 @@
 [alias]
 br = "build --release"
+baf = "build --all-features"
+braf = "build --release --all-features"
+caf = "check --all-features"
+taf = "test --all-features"
+raf = "run --all-features"
 
 [cargo-new]
 name = "Gordon Hart"
