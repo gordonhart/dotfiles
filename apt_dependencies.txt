@@ -3,3 +3,5 @@ git
 tmux
 xterm
 i3
+htop
+lm-sensors
