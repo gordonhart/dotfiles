@@ -21,7 +21,7 @@ set autoindent
 nmap \\ :w<CR>
 
 " capital D in command mode to delete to previous line end
-nmap D ^d0i<Bs> <esc>
+nmap D kJ
 
 " capital B to return to previous buffer
 nmap B :b#<CR>
