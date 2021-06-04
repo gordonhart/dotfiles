@@ -1,0 +1,2 @@
+" capital D in command mode to delete to previous line end
+nmap D kJ
