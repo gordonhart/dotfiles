@@ -7,20 +7,13 @@
 #                 #
 # # # # # # # # # #
 
+
+# VARIABLES =====================================================================================
+
 export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# PATHS =========================================================================================
-
 export PATH="/usr/local/bin:usr/local:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-
-export NODE_PATH="/usr/local/lib/node_modules"
-
 export EDITOR="/usr/bin/vim"
-
-### PYTHONPATH
-export PYTHONPATH="${HOME}/Projects/caffe_2/caffe/python:$PYTHONPATH"
-# export DYLD_FALLBACK_LIBRARY_PATH="${HOME}/.anaconda/include:$DYLD_FALLBACK_LIBRARY_PATH"
 
 # ALIASES =======================================================================================
 
@@ -218,15 +211,6 @@ tmuxpanetitle() {
 } # set title of new pane if inside tmux environment
 if [ ! -z "$TMUX" ]; then tmuxpanetitle "$PWD"; fi
 
-val() { # alias to run Valgrind memory checker for C programs
-	if [ -z "$1" ]; then
-		echo "Improper input : one argument expected"
-	else
-		echo "> valgrind --tool=memcheck --leak-check=full --dsymutil=yes ./$1"
-		valgrind --tool=memcheck --leak-check=full --dsymutil=yes ./$1
-	fi
-}
-
 
 # PROMPT ========================================================================================
 
@@ -239,7 +223,7 @@ C_PINK="\[\033[38;5;183m\]" # pale pinkish-purple
 C_WHITE="\[\033[38;5;255m\]" # eeeeee
 
 setPrompt(){
-  LEN=60
+  LEN=120
   OUT=$(truncate $LEN "`pwd`")
   # OUT="$(pwd)"
 	# PS1="$C_GRAY`whoami`$C_WHITE : $C_PINK$OUT$C_WHITE : $C_GRAY[\A] $C_WHITE$ "

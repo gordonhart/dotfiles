@@ -4,3 +4,8 @@ email = gordon.hart2@gmail.com
 
 [credential]
 helper = store
+
+[alias]
+ca = commit --amend
+cerise = cherry-pick
+stauts = status
