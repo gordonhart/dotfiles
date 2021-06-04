@@ -12,13 +12,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # PATHS =========================================================================================
 
 export PATH="/usr/local/bin:usr/local:$PATH"
-
-### DIFFERENT PYTHON DISTRIBUTIONS
-# export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-# export PATH="/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
-# export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
-export PATH="/users/gordonhart/.anaconda/bin:$PATH" # added by Anaconda 2.3.0 installer
-
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -28,54 +21,6 @@ export EDITOR="/usr/bin/vim"
 ### PYTHONPATH
 export PYTHONPATH="${HOME}/Projects/caffe_2/caffe/python:$PYTHONPATH"
 # export DYLD_FALLBACK_LIBRARY_PATH="${HOME}/.anaconda/include:$DYLD_FALLBACK_LIBRARY_PATH"
-
-# lynx setup
-export WWW_HOME="https://www.google.com/ncr"
-export LYNX_LSS="$HOME/.lynx.lss"
-alias lynx="lynx -accept_all_cookies"
-
-# alias ssh-vm-ub="ssh -Y -p 3022 syntech@127.0.0.1"
-alias ssh-vm-deb="ssh -Y -p 4022 syntech@127.0.0.1"
-
-# gpg-connect-agent updatestartuptty /bye >/dev/null
-# export SSH_AUTH_SOCK=/Users/gordonhart/.gnupg/S.gpg-agent.ssh
-
-setup-docker() {
-    eval $(docker-machine env vbox-docker-machine)
-}
-
-rustrun() {
-    if [ -n "$2" ] || [ -z "$1" ]; then
-        echo "Usage: rustrun PROGRAM.rs"
-        return 1
-    fi
-    rustc $1.rs || return 1
-    ./$1
-    rm -f $1
-}
-
-syn-clone() {
-    if [ -z "$1" ]; then
-        echo "Usage: syn-clone REPO [REPO [REPO [...]]]"
-        return 1
-    fi
-    for REPO in "$@"; do
-        git clone https://github.com/SyntechCorporation/$REPO.git;
-    done
-}
-
-syn-premerge-check() {
-    if [ -n "$2" ]; then
-        echo "Usage: syn-premerge-check [BASE_BRANCH]"
-        return 1
-    fi
-    BASE_BRANCH="$1"
-    if [ -z "$1" ]; then
-        BASE_BRANCH="origin/develop"
-        echo "No branch specified, using $BASE_BRANCH"
-    fi
-    git diff --no-commit-id --name-only -r "$BASE_BRANCH" |  xargs pre-commit run --files
-}
 
 # ALIASES =======================================================================================
 
@@ -88,18 +33,16 @@ alias sl="ls -p"
 alias rm="rm -i" # warn before deleting file
 
 alias cd="changedir" # rename tmux pane on directory change
-# alias cat="catnonbinary"
 
 # naviagation aliases
-# alias .="ls -p" # ls alias
 alias ..="cd .." # back one
 alias ...="cd ../.." # two
 alias ....="cd ../../.." # three
-# alias ~="cd" # go home
-
-alias work="cd $HOME/Work/Synapse && ls"
-alias school="cd '${SCHOOLPATH}' && ls"
-
+alias .....="cd ../../../.." # four
+alias ......="cd ../../../../.." # five
+alias .......="cd ../../../../../.." # six
+alias ........="cd ../../../../../../.." # seven
+alias .........="cd ../../../../../../../.." # eight
 
 alias git-tree="git log --oneline --color --graph --decorate"
 # alias bashprof="printf \"> lime ~/.bash_profile\n\"; lime ~/.bash_profile"
@@ -110,37 +53,9 @@ alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; \
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; \
 	killall Finder /System/Library/CoreServices/Finder.app"
 
-alias kts="kick_the_speakers"
-
 alias dns_flush="dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
-# get the battery percentage as a raw number
-# alias battery_pct="BATTERY_PCT=\"$(pmset -g batt | cut -d' ' -f3 | tail -n1 | sed 's/[[:space:];%]*//g')\""
-
-# better racket (scheme) repl by default
-alias racket="racket -il xrepl"
-
-
 # FUNCTIONS =====================================================================================
-
-c() { # compile and run c programs with a single command
-	if [ -z "$1" ]; then # no new script name
-		echo; echo "Improper input."
-		echo "Type \"c <FILENAME (no extension)>\""; echo
-	else
-		echo "> gcc -o $1 $1.c"
-		gcc -o $1 $1.c &> compile_output.txt # write temp file compile.txt
-
-		if [ -z "$(cat compile_output.txt)" ]; then # if there is no output, run it
-			echo "> ./$1"; echo
-			./$1
-		else
-			cat compile_output.txt
-		fi
-
-		rm -rf compile_output.txt
-	fi
-}
 
 changedir() { # wrapper to cd to set tmux pane title on change
   if [ -z "$1" ]; then builtin cd ~
@@ -163,49 +78,6 @@ check() { # spell check tex files
 
 cdl(){ cd "$@"; ls; } # alias to both change directory and list files
 cdla(){ cd "$@"; lsa; }
-
-comp() { # switch to assignment for COMP courses
-	if [ -z "$1" ]; then echo "> comp XYZ <assignment number>"
-	else course comp "${@:1}"; fi
-}
-
-course() { # generic command for the 'comp' function above, where any course can be called
-	if [ -z "$2" ]; then # no course number
-		echo "> course ABCD XYZ <assignment number>"
-	else
-		CNAME="$(echo "$1$2" | tr '[:lower:]' '[:upper:]')"
-		# search for course name in academics folder, quit once first result is returned
-		# COURSEPATH="$(find ~/Documents/Academics/McGill -name "$CNAME" -print -quit)"
-		# get rid of McGill on coursepath to allow for abroad directory to be searched
-    COURSEPATH="$(find ~/Academics -name "$CNAME" -print -quit)"
-		if [ -z "$COURSEPATH" ]; then
-			echo "You haven't taken any course named $CNAME..."
-		else
-			if [ -z "$3" ]; then
-        cd "$COURSEPATH"
-				pwd; ls
-			elif [ "$3" == "-d" ]; then # allow -d tag to swtich directly to folder
-        cd "$COURSEPATH/$4"
-				pwd; ls # ex: comp 424 -d Project/src
-			elif [ -d "$COURSEPATH/Assignments/$3" ]; then
-        cd "$COURSEPATH/Assignments/$3"
-				pwd; ls
-			else
-				echo "No assignment '$3' found for $CNAME."; pwd; ls
-			fi
-		fi
-	fi
-}
-
-endall() { # kill all commands named $1
-	if [ -z "$1" ]; then echo "> endall <proc identifier>"
-	else pgrep "$1" | xargs kill; fi
-}
-
-kick_the_speakers() { # restart pi that runs the speakers
-	echo "> ssh -t speakers@10.0.1.20 sudo reboot"
-	ssh -t speakers@10.0.1.20 sudo reboot
-}
 
 mkcd() { # function to make directory and change to directory
 	if [ -z "$1" ]; then
@@ -252,6 +124,17 @@ reTeX() { # compile and open LaTeX file
 		# open $BASENAME.pdf
 	fi
 }
+
+rustrun() {
+    if [ -n "$2" ] || [ -z "$1" ]; then
+        echo "Usage: rustrun PROGRAM.rs"
+        return 1
+    fi
+    rustc $1.rs || return 1
+    ./$1
+    rm -f $1
+}
+
 
 sizeof() {
 	if [ -z "$1" ]; then echo "Improper input : >= one argument expected"
