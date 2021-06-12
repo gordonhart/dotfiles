@@ -9,3 +9,6 @@ helper = store
 ca = commit --amend
 cerise = cherry-pick
 stauts = status
+
+[pull]
+ff = only
