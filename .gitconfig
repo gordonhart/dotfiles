@@ -9,6 +9,17 @@ helper = store
 ca = commit --amend
 cerise = cherry-pick
 stauts = status
+stuats = status
+ct = checkout trunk
+p = pull
 
 [pull]
 ff = only
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	autoSetupRemote = true

@@ -1,4 +1,3 @@
-
 " small vimrc
 
 " colored syntax with non-standard color scheme
@@ -8,7 +7,7 @@ highlight LineNr ctermfg=DarkGrey
 
 " tabs as four spaces (personal preference)
 set tabstop=4
-set softtabstop=4
+set softtabstop=0 noexpandtab
 set shiftwidth=4
 set expandtab
 

@@ -1,4 +1,2 @@
-# set shell to vim mode, enabling standard command mode/insert mode navigation
-# and modification
 set editing-mode vi
 set keymap vi-command
