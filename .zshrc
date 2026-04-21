@@ -2,16 +2,8 @@
 # manual
 #
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 # vim mode
 set -o vi
-
-# Created by `pipx` on 2024-01-13 04:09:26
-export PATH="$PATH:/Users/gh-kolena/.local/bin"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 alias gti="git"
 alias gs="git status"
@@ -30,7 +22,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gh-kolena"
+ZSH_THEME="gordonhart"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -123,12 +115,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gh-kolena/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gh-kolena/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/gh-kolena/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gh-kolena/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
