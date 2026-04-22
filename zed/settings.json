@@ -1,0 +1,31 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "show_wrap_guides": true,
+  "minimum_contrast_for_highlights": 55.0,
+  "buffer_line_height": "standard",
+  "buffer_font_weight": 400.0,
+  "buffer_font_family": ".ZedMono",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "vim_mode": true,
+  "base_keymap": "JetBrains",
+  "ui_font_size": 15.0,
+  "buffer_font_size": 13.0,
+  "theme": "JetBrains Dark High Contrast",
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+      "show_commit_summary": false,
+      "show_inline_for_current_line": false
+    }
+  }
+}

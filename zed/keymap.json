@@ -1,0 +1,8 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "f10": "editor::ToggleGitBlame"
+    }
+  }
+]
